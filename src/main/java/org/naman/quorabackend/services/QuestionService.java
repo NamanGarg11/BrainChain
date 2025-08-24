@@ -115,7 +115,7 @@ return result;
         Pageable pageable = PageRequest.of(page, size);
 
         return questionRepository
-                .findByTagNamesContaining(tag, pageable)
+                .findByTagsContaining(tag, pageable)
                 .map(QuestionAdapter::toQuestionResponseDTO);
     }
 

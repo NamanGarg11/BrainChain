@@ -20,7 +20,7 @@ public class Like {
 
     private TargetType TargetType;
 
-     private Boolean isLike;
+     private Boolean Liked;
 
     @CreatedDate
     private LocalDateTime createdAt;

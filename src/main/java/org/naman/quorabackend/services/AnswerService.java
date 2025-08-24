@@ -59,5 +59,34 @@ public class AnswerService implements IAnswerService {
                 .map(AnswerAdapter::toResponseDTO);
     }
 
+    public Flux<AnswerResponseDTO> getAnswersByQuestionId(String questionId) {
+        return answerRepository.findByQuestionId(questionId)
+                .map(this::mapToResponseDTO);
+    }
+
+    public Mono<Long> getAnswerCountByQuestionId(String questionId) {
+        return answerRepository.countByQuestionId(questionId);
+    }
+
+    public Flux<AnswerResponseDTO> getAnswersByQuestionIdOrderByCreatedAtDesc(String questionId) {
+        return answerRepository.findByQuestionIdOrderByCreatedAtDesc(questionId)
+                .map(this::mapToResponseDTO);
+    }
+
+    public Flux<AnswerResponseDTO> getAnswersByQuestionIdOrderByCreatedAtAsc(String questionId) {
+        return answerRepository.findByQuestionIdOrderByCreatedAtAsc(questionId)
+                .map(this::mapToResponseDTO);
+    }
+
+    private AnswerResponseDTO mapToResponseDTO(Answer answer) {
+        return AnswerResponseDTO.builder()
+                .id(answer.getId())
+                .content(answer.getContent())
+                .questionId(answer.getQuestionId())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
+    }
+
 
 }

@@ -43,7 +43,7 @@ public class LikeService implements ILikeService {
                     Like like = new Like();
                     like.setTargetId(dto.getTargetId());
                     like.setTargetType(dto.getTargetType());
-                    like.setIsLike(dto.getIsLike());
+                    like.setLiked(dto.getIsLike());
                     like.setCreatedAt(LocalDateTime.now());
                     return likeRepository.save(like);
                 })
@@ -52,13 +52,13 @@ public class LikeService implements ILikeService {
 
     @Override
     public Flux<LikeResponseDTO> countLikeByTargetIdandTargetType(String targetId, TargetType targetType) {
-        return likeRepository.findByTargetIdAndTargetTypeAndIsLike(targetId, targetType, true)
+        return likeRepository.findByTargetIdAndTargetTypeAndLiked(targetId, targetType, true)
                 .map(LikeAdapter::toResponseDTO);
     }
 
     @Override
     public Mono<LikeResponseDTO> countDisLikesByTargetIdandTargetType(String targetId, TargetType targetType) {
-        return likeRepository.countByTargetIdAndTargetTypeAndIsLike(targetId, targetType, false)
+        return likeRepository.countByTargetIdAndTargetTypeAndLiked(targetId, targetType, false)
                 .map(count -> new LikeResponseDTO(targetId, targetType, false, LocalDate.now()));
     }
 

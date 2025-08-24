@@ -10,7 +10,7 @@ public class LikeAdapter {
         return new LikeResponseDTO(
                 like.getTargetId(),
                 like.getTargetType(),
-                like.getIsLike(),
+                like.getLiked(),
                 LocalDate.now()
         );
     }

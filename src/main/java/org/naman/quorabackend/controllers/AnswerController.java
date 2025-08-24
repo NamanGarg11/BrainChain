@@ -62,26 +62,26 @@ public class AnswerController {
     public Flux<AnswerResponseDTO> getAllAnswers() {
         return answerService.getAllAnswers();
     }
-//
-//    @GetMapping("/question/{questionId}")
-//    public Flux<AnswerResponseDTO> getAnswersByQuestionId(@PathVariable String questionId) {
-//        return answerService.getAnswersByQuestionId(questionId);
-//    }
-//
-//    @GetMapping("/question/{questionId}/count")
-//    public Mono<ResponseEntity<Long>> getAnswerCountByQuestionId(@PathVariable String questionId) {
-//        return answerService.getAnswerCountByQuestionId(questionId)
-//                .map(count -> ResponseEntity.ok(count))
-//                .onErrorResume(error -> Mono.just(ResponseEntity.badRequest().build()));
-//    }
-//
-//    @GetMapping("/question/{questionId}/latest")
-//    public Flux<AnswerResponseDTO> getAnswersByQuestionIdLatestFirst(@PathVariable String questionId) {
-//        return answerService.getAnswersByQuestionIdOrderByCreatedAtDesc(questionId);
-//    }
-//
-//    @GetMapping("/question/{questionId}/oldest")
-//    public Flux<AnswerResponseDTO> getAnswersByQuestionIdOldestFirst(@PathVariable String questionId) {
-//        return answerService.getAnswersByQuestionIdOrderByCreatedAtAsc(questionId);
-//    }
+
+    @GetMapping("/question/{questionId}")
+    public Flux<AnswerResponseDTO> getAnswersByQuestionId(@PathVariable String questionId) {
+        return answerService.getAnswersByQuestionId(questionId);
+    }
+
+    @GetMapping("/question/{questionId}/count")
+    public Mono<ResponseEntity<Long>> getAnswerCountByQuestionId(@PathVariable String questionId) {
+        return answerService.getAnswerCountByQuestionId(questionId)
+                .map(count -> ResponseEntity.ok(count))
+                .onErrorResume(error -> Mono.just(ResponseEntity.badRequest().build()));
+    }
+
+    @GetMapping("/question/{questionId}/latest")
+    public Flux<AnswerResponseDTO> getAnswersByQuestionIdLatestFirst(@PathVariable String questionId) {
+        return answerService.getAnswersByQuestionIdOrderByCreatedAtDesc(questionId);
+    }
+
+    @GetMapping("/question/{questionId}/oldest")
+    public Flux<AnswerResponseDTO> getAnswersByQuestionIdOldestFirst(@PathVariable String questionId) {
+        return answerService.getAnswersByQuestionIdOrderByCreatedAtAsc(questionId);
+    }
 }

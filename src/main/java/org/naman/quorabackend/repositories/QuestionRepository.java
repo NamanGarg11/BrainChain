@@ -24,6 +24,6 @@ public interface QuestionRepository extends ReactiveMongoRepository<Question, St
 
     Mono<Long> countByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(String title, String content);
 
-    Flux<Question> findByTagNamesContaining(String tagName, Pageable pageable);
+    Flux<Question> findByTagsContaining(String tagName, Pageable pageable);
 }
 
