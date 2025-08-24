@@ -10,6 +10,7 @@ import org.naman.quorabackend.events.ViewCountEvent;
 import org.naman.quorabackend.models.Question;
 import org.naman.quorabackend.producers.KafkaEventProducer;
 import org.naman.quorabackend.repositories.QuestionRepository;
+import org.naman.quorabackend.repositories.TagRepository;
 import org.naman.quorabackend.utils.CursorUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,16 +29,19 @@ public class QuestionService implements IQuestionService {
     private final QuestionRepository questionRepository;
     private final KafkaEventProducer  kafkaEventProducer;
     private final IQuestionIndexService questionIndexService;
+    private final TagRepository tagRepository;
     @Override
     public Mono<QuestionResponseDTO> createQuestion(QuestionRequestDTO questionRequestDTO) {
        Question question =Question.builder()
                .title(questionRequestDTO.getTitle())
                .content(questionRequestDTO.getContent())
+               .tags(questionRequestDTO.getTag())
                .createdAt(LocalDateTime.now())
                .updatedAt(LocalDateTime.now())
                .build();
       return questionRepository.save(question)
               .map(QuestionAdapter::toQuestionResponseDTO)
+//               for elastic search u need to create a speacial questionIndex
 //               .map(savedQuestion->{
 ////                   questionIndexService.createQuestionIndex(savedQuestion);
 //                   return QuestionAdapter.toQuestionResponseDTO(savedQuestion);
@@ -106,6 +110,14 @@ public class QuestionService implements IQuestionService {
 return result;
 }
 
+    @Override
+    public Flux<QuestionResponseDTO> getQuestionByTag(String tag, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        return questionRepository
+                .findByTagNamesContaining(tag, pageable)
+                .map(QuestionAdapter::toQuestionResponseDTO);
+    }
 
 
 }

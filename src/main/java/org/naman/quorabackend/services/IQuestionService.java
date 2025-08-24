@@ -17,4 +17,5 @@ public interface IQuestionService {
 // BUG
     public Flux<QuestionResponseDTO> getAllQuestions(String Cursor,int size);
     public Mono<PaginationRespnseDTO<Question>> getPaginatedQuestions(String searchTerm, int page, int size);
+    public Flux<QuestionResponseDTO> getQuestionByTag(String tag, int page, int size);
 }

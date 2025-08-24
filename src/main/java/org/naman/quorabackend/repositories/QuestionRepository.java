@@ -2,6 +2,7 @@ package org.naman.quorabackend.repositories;
 
 import org.naman.quorabackend.dto.QuestionResponseDTO;
 import org.naman.quorabackend.models.Question;
+import org.reactivestreams.Publisher;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
@@ -22,4 +23,7 @@ public interface QuestionRepository extends ReactiveMongoRepository<Question, St
     Flux<Question> findTop10ByOrderByCreatedAtAsc();
 
     Mono<Long> countByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(String title, String content);
+
+    Flux<Question> findByTagNamesContaining(String tagName, Pageable pageable);
 }
+

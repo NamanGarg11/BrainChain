@@ -3,6 +3,8 @@ package org.naman.quorabackend.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -12,4 +14,5 @@ public class QuestionResponseDTO {
     private String title;
     private String content;
     private LocalDateTime createdAt;
+    private List<String> tags;
 }

@@ -9,6 +9,7 @@ public class QuestionAdapter {
     return QuestionResponseDTO.builder()
             .Id(question.getId())
             .title(question.getTitle())
+            .tags(question.getTags())
             .content(question.getContent())
             .createdAt(question.getCreatedAt())
             .build();

@@ -52,7 +52,6 @@ public class QuestionController {
     ) {
         return questionService.SearchQuestions(query, page, size);
     }
-
     // getting all question using cursor based pagination
 
     @GetMapping("/questions")
@@ -79,7 +78,7 @@ public class QuestionController {
      @RequestParam(defaultValue = "0") int page,
      @RequestParam(defaultValue = "10") int size
     ) {
-        throw new UnsupportedOperationException("Not implemented");
+      return  questionService.getQuestionByTag(tag,page,size);
     }
 
 

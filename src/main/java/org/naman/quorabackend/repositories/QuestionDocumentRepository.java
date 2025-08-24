@@ -7,7 +7,7 @@ import org.naman.quorabackend.models.QuestionElasticDocument;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
 
-public interface QuestionDocumentRepository extends ReactiveMongoRepository<QuestionElasticDocument, String> {
+public interface QuestionDocumentRepository extends ReactiveMongoRepository   /*ElasticsearchRepository;*/<QuestionElasticDocument, String> {
 
     List<QuestionElasticDocument> findByTitleContainingOrContentContaining(String title, String content);
 }

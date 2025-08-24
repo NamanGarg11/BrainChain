@@ -12,6 +12,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -31,7 +32,10 @@ public class Question {
     @Size(min = 10, max = 100 , message = "Content must be btw 10 to 100 words")
     private String content;
 
+
     private Integer views;
+
+    private List<String> tags;
     @CreatedDate
     private LocalDateTime createdAt;
 
