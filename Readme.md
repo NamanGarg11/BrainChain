@@ -1,4 +1,4 @@
-# BranChain
+# BrainChain
 BranChain is a reactive knowledge-sharing backend inspired by platforms like Quora.
 It enables users to ask questions, search content, explore topics through tags, and interact using likes/dislikes — all built with Spring WebFlux, Reactive MongoDB, and Kafka event streaming for scalability.
 
